@@ -30,3 +30,26 @@
 .right{
     float:right;
 }
+
+.gallery-view{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:center;
+    background-color:black;
+
+    .gallery-item{
+        width:128px;
+        height:86px;
+        overflow: hidden;
+        background-color:black;
+        margin:10px;
+
+        img{
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+
+        }
+    }
+}

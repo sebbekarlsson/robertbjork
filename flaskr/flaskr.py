@@ -3,8 +3,12 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from mylib.flickr import Flickr
+import yaml
 
-    
+
+with open("../config.yml", 'r') as stream:
+            config = yaml.load(stream)
+
 DATABASE = '/tmp/robertbjork.db'
 DEBUG = True
 USERNAME = 'root'
@@ -36,8 +40,13 @@ def connect_db():
 
 @app.route('/')
 def index():
-    image_urls = flickr.get_photos('robertbjork', 1, 100, 'm')
-    return render_template('index.html', image_urls=image_urls)
+    return render_template('index.html')
+
+@app.route('/flickr-gallery/<page>')
+def flickr_gallery(page=1):
+    thumbnails = flickr.get_photos('robertbjork', page, 100, 't')
+    image_urls = flickr.get_photos('robertbjork', page, 100, config['gallery']['largest'])
+    return render_template('gallery.html', image_urls=image_urls, thumbnails=thumbnails)
 
 @app.route('/login')
 def login():

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div class='gallery-view'>
+ {% for src in thumbnails %}
+    <div class='gallery-item'>
+        <a href='{{ image_urls[loop.index0] }}' target='_blank'>
+            <img src="{{ src }}">
+        </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

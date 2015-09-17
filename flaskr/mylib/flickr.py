@@ -25,7 +25,7 @@ class Flickr(object):
         r = self.send_request(method='flickr.people.getPhotos', args='user_id={person}&page={page}&per_page={per_page}'\
         .format(person=person, page=page, per_page=per_page))
 
-        root = ET.fromstring(r.text)
+        root = ET.fromstring(r.text.encode('utf-8'))
 
         for child in root.getchildren():
             for photo in child.getchildren():
