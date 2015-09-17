@@ -2,12 +2,15 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
+from mylib.flickr import Flickr
 
     
 DATABASE = '/tmp/robertbjork.db'
 DEBUG = True
 USERNAME = 'root'
 PASSWORD = 'tango255'
+
+flickr = Flickr()
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -33,7 +36,8 @@ def connect_db():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    image_urls = flickr.get_photos('robertbjork', 1, 100, 'm')
+    return render_template('index.html', image_urls=image_urls)
 
 @app.route('/login')
 def login():
