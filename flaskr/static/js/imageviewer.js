@@ -11,5 +11,5 @@ function closeViewer(){
     viewer.style.display = 'none';
 
     image = document.querySelector('#image-viewer-src')
-    image.setAttribute('background-image', '');
+    image.style.backgroundImage = "";
 }
