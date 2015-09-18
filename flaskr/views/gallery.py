@@ -8,6 +8,6 @@ gallery = Blueprint('gallery', __name__,
 flickr = Flickr()
 
 @gallery.route('/gallery/<page>')
-def flickr_gallery(page=1):
+def gallery_blueprint(page=1):
     photos = flickr.get_photos('robertbjork', page, 128)
     return render_template('gallery.html', photos=photos, page=page)
