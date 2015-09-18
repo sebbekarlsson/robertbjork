@@ -1,5 +1,18 @@
 {% extends "layout.html" %}
-{% block title %} Login {% endblock %}
+{% block title %} Contact {% endblock %}
+
 {% block content %}
-<h1>Contact</h1>
+
+<div class='biography info'>
+    <h1>You can contact me below</h1>
+    <p>
+        <form class='typo-form'>
+            <input class='typo-text info-full' type='text' name='your_name' placeholder='Your Name'>
+            <input class='typo-text info-full' type='email' name='your_email' placeholder='Your Email'>
+            <textarea class='typo-textarea info-full' placeholder='Your Message'></textarea>
+            <input type='submit' name='submit' value='Submit'>
+        </div>
+    </p>
+</div>
+
 {% endblock %}

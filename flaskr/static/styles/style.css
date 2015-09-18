@@ -7,6 +7,9 @@
   height: 150px;
   width: 100%; }
 
+#content {
+  padding: 8px; }
+
 .navbar {
   width: 100%;
   height: 48px; }
@@ -46,6 +49,57 @@
 
 .right {
   float: right; }
+
+.biography {
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  border-bottom-width: 1px; }
+  .biography h1, .biography h2, .biography h3 {
+    font-family: Georgia,serif;
+    color: #4E443C;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 100;
+    margin-bottom: 0; }
+  .biography p {
+    font-family: "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 14px;
+    margin-top: .5em;
+    color: #666;
+    font-family: Georgia,serif;
+    font-size: .8em;
+    font-weight: bold;
+    letter-spacing: 2px; }
+
+.info {
+  padding-top: 12px;
+  padding-bottom: 12px; }
+
+.info-full {
+  padding: 8px; }
+
+.typo-form {
+  width: 60%; }
+
+.typo-textarea {
+  width: 100%;
+  height: 64px;
+  border: none;
+  outline-style: solid;
+  outline-color: lightgray;
+  outline-width: 1px;
+  resize: none; }
+
+.typo-text {
+  outline-style: solid;
+  outline-color: lightgray;
+  outline-width: 1px;
+  display: block;
+  border: none;
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 4px;
+  width: 100%; }
 
 .gallery-view {
   display: -webkit-box;
