@@ -11,9 +11,7 @@
         </div>
         {% for photo in photos %}
             <div class='gallery-item'>
-                <a href="{{ photo.get_src('b') }}" target="_blank" rel="lightbox">
-                    <img src="{{ photo.get_src('q') }}">
-                </a>
+                <img src="{{ photo.get_src('q') }}" onclick="viewImage('{{ photo.get_src('b') }}')">
             </div>
         {% endfor %}
     </div>
