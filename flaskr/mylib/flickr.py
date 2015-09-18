@@ -2,6 +2,16 @@ import requests
 import yaml as yaml
 import xml.etree.ElementTree as ET
 
+class Photo(object):
+    def __init__(self, photo_id, server_id, secret, farm):
+        self.src_template = 'https://farm{farm}.staticflickr.com/{server_id}/{photo_id}_{secret}_{size}.jpg'
+        self.farm = farm
+        self.server_id = server_id
+        self.photo_id = photo_id
+        self.secret = secret
+
+    def get_src(self, size):
+        return self.src_template.format(farm=self.farm, server_id=self.server_id, photo_id=self.photo_id, secret=self.secret, size=size)
 
 class Flickr(object):
     def __init__(self):
@@ -22,6 +32,7 @@ class Flickr(object):
 
     def get_photos(self, person, page, per_page, size):
         urls = []
+        photos = []
         r = self.send_request(method='flickr.people.getPhotos', args='user_id={person}&page={page}&per_page={per_page}'\
         .format(person=person, page=page, per_page=per_page))
 
@@ -29,13 +40,13 @@ class Flickr(object):
 
         for child in root.getchildren():
             for photo in child.getchildren():
-                url = 'https://farm{farm}.staticflickr.com/{server_id}/{photo_id}_{secret}_{size}.jpg'
 
                 id = photo.attrib['id']
                 secret = photo.attrib['secret']
                 server = photo.attrib['server']
                 title = photo.attrib['title']
 
-                urls.append(url.format(farm=self.farm, server_id=server, photo_id=id, secret=secret, size=size))
+                photo = Photo(photo_id=id, server_id=server, secret=secret, farm=self.farm)
+                photos.append(photo)
 
-        return urls
+        return photos

@@ -2,8 +2,8 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
-from mylib.flickr import Flickr
 import yaml
+from views.gallery import gallery
 
 
 with open("../config.yml", 'r') as stream:
@@ -14,10 +14,10 @@ DEBUG = True
 USERNAME = 'root'
 PASSWORD = 'tango255'
 
-flickr = Flickr()
-
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+app.register_blueprint(gallery)
 
 def init_db():
     with closing(connect_db()) as db:
@@ -42,15 +42,6 @@ def connect_db():
 def index():
     return render_template('index.html')
 
-@app.route('/flickr-gallery/<page>')
-def flickr_gallery(page=1):
-    thumbnails = flickr.get_photos('robertbjork', page, 100, 't')
-    image_urls = flickr.get_photos('robertbjork', page, 100, config['gallery']['largest'])
-    return render_template('gallery.html', image_urls=image_urls, thumbnails=thumbnails)
-
 @app.route('/login')
 def login():
     return render_template('login.html')
-
-if __name__ == '__main__':
-    app.run()
