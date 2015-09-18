@@ -12,7 +12,12 @@
     {% endblock %}
   </head>
     <body>
-      <nav class='navbar navbar-red'>
+      <div id='site-top'>
+        <a href='/'>
+          <img src="{{ url_for('static', filename='images/bjork.jpg') }}" id='toplogo'>
+        </a>
+      </div>
+      <nav class='navbar navbar-black'>
         <ul class='left'>
           <li><a class='navbtn' href='/'>Home</a></li>
           <li><a class='navbtn' href='/gallery/1'>Gallery</a></li>
