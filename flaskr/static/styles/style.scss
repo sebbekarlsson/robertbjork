@@ -146,3 +146,11 @@ $site_red: #e74c3c;
        vertical-align: middle;
     }
 }
+
+@media screen and (max-width: 700px) {
+    .navbar{
+        .navbtn{
+            font-size:12px !important;
+        }
+    }
+}
