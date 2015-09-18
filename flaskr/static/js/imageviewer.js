@@ -3,7 +3,7 @@ function viewImage(src){
     viewer.style.display = 'block';
 
     image = document.querySelector('#image-viewer-src')
-    image.setAttribute('src', src);
+    image.style.backgroundImage = "url('" + src + "')";
 }
 
 function closeViewer(){
@@ -11,5 +11,5 @@ function closeViewer(){
     viewer.style.display = 'none';
 
     image = document.querySelector('#image-viewer-src')
-    image.setAttribute('src', '');
+    image.setAttribute('background-image', '');
 }

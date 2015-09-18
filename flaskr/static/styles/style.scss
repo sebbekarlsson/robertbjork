@@ -125,10 +125,14 @@ $site_red: #e74c3c;
     #image-viewer-src{
         display: block;
         margin-top:56px;
-        width:60%;
-        height:auto;
+        width:70%;
+        height:70%;
         margin-left: auto;
         margin-right: auto;
+        background-position: center;
+        background-size:80%;
+        background-repeat: no-repeat;
+        background-color:black;
     }
 
     #image-viewer-control{
