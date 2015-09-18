@@ -2,13 +2,19 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<div class='gallery-view'>
- {% for photo in photos %}
-    <div class='gallery-item'>
-        <a href="{{ photo.get_src('b') }}" target="_blank">
-            <img src="{{ photo.get_src('t') }}">
-        </a>
+    <div class='gallery-view'>
+        <div class='navbar navbar-simple'>
+            <ul>
+                <li><a class='navbtn' href="/gallery/{{page|int - 1}}">Previous</a></li>
+                <li><a class='navbtn' href="/gallery/{{page|int + 1}}">Next</a></li>
+            </ul>
+        </div>
+        {% for photo in photos %}
+            <div class='gallery-item'>
+                <a href="{{ photo.get_src('b') }}" target="_blank" rel="lightbox">
+                    <img src="{{ photo.get_src('q') }}">
+                </a>
+            </div>
+        {% endfor %}
     </div>
-  {% endfor %}
-</div>
 {% endblock %}

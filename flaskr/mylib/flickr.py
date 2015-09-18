@@ -30,7 +30,7 @@ class Flickr(object):
         
         return r
 
-    def get_photos(self, person, page, per_page, size):
+    def get_photos(self, person, page, per_page):
         urls = []
         photos = []
         r = self.send_request(method='flickr.people.getPhotos', args='user_id={person}&page={page}&per_page={per_page}'\

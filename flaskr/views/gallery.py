@@ -9,5 +9,5 @@ flickr = Flickr()
 
 @gallery.route('/gallery/<page>')
 def flickr_gallery(page=1):
-    photos = flickr.get_photos('robertbjork', page, 100, 't')
-    return render_template('gallery.html', photos=photos)
+    photos = flickr.get_photos('robertbjork', page, 128)
+    return render_template('gallery.html', photos=photos, page=page)
