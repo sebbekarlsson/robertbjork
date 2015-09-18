@@ -12,11 +12,6 @@ from views.index import index
 with open("../config.yml", 'r') as stream:
             config = yaml.load(stream)
 
-DATABASE = '/tmp/robertbjork.db'
-DEBUG = True
-USERNAME = 'root'
-PASSWORD = 'tango255'
-
 app = Flask(__name__)
 app.config.from_object(__name__)
 
