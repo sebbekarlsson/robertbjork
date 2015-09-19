@@ -19,11 +19,20 @@ class MyForm(Form):
 @register.route('/register', methods=('GET', 'POST'))
 def register_blueprint():
     form = MyForm(csrf_enabled=False)
+    msg = ''
 
     if form.validate_on_submit():
-        user = User(email=form.email.data, password=form.password.data)
-        sess.add(user)
-        sess.commit()
-        flash('Thank you for registering!')
 
-    return render_template('register.html', form=form)
+        if form.password.data != form.password_confirm.data:
+            msg = 'Passwords does not match'
+        else:
+            if sess.query(User).filter(User.email==form.email.data).count() > 0:
+                msg = 'This email is already registered'
+            else:
+                user = User(email=form.email.data, password=form.password.data)
+                sess.add(user)
+                sess.commit()
+
+                msg = 'Thank you for registering'
+
+    return render_template('register.html', form=form, msg=msg)
