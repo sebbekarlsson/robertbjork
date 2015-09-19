@@ -80,6 +80,8 @@
 
 .typo-form {
   width: 60%; }
+  .typo-form ul, .typo-form li {
+    margin-bottom: 12px; }
 
 .typo-textarea {
   width: 100%;

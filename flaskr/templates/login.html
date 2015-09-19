@@ -1,5 +1,21 @@
 {% extends "layout.html" %}
+
 {% block title %} Login {% endblock %}
 
 {% block content %}
+
+{% from "_formhelpers.html" import render_field %}
+<form class='typo-form biography' method="POST" action="/login">
+    <ul>
+        <li>
+            {{ render_field(form.email, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(form.password, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(form.submit) }}
+        </li>
+    </ul>
+</form>
 {% endblock %}
