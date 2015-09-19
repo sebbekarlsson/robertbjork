@@ -4,11 +4,8 @@
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/slimbox2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/imageviewer.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/slimbox2.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/slimbox2-rtl.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <title>{% block title %}{% endblock %} - RobertBjork</title>
     {% endblock %}
