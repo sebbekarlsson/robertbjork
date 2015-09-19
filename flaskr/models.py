@@ -4,7 +4,12 @@ from sqlalchemy.ext.declarative import declarative_base
  
  
 Base = declarative_base()
-session = None
+
+engine = create_engine('sqlite:///database.sqlite')
+Session = sessionmaker()
+Session.configure(bind=engine)
+
+sess = Session()
  
  
 class User(Base):
@@ -12,11 +17,8 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String)
     password = Column(String)
+    admin = Column(Integer, default=0)
 
 
 def initialize_database():
-    engine = create_engine('sqlite:///database.sqlite')
-
-    session = sessionmaker()
-    session.configure(bind=engine)
     Base.metadata.create_all(engine)

@@ -6,6 +6,7 @@ import yaml
 from views.gallery import gallery
 from views.contact import contact
 from views.login import login
+from views.register import register
 from views.index import index
 
 
@@ -15,7 +16,11 @@ with open("../config.yml", 'r') as stream:
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+app.secret_key = 'THIS_IS_VERY_SECRET'
+app.config['SESSION_TYPE'] = 'filesystem'
+
 app.register_blueprint(index)
 app.register_blueprint(gallery)
 app.register_blueprint(contact)
 app.register_blueprint(login)
+app.register_blueprint(register)
