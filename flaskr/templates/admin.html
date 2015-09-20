@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %} Admin {% endblock %}
+
+{% block content %}
+
+<div class='side-menu'>
+    <ul>
+        <li>
+            <a class='navbtn' href='/admin/users/0'><span>Users</span></a>
+        </li>
+        <li>
+            <a class='navbtn' href='/admin/meta'><span>Meta</span></a>
+        </li>
+        <li>
+            <a class='navbtn' href='/admin/flickr'><span>Flickr</span></a>
+        </li>
+    </ul>
+</div>
+
+<div class='admin-content'>
+    <div class='info-full biography'>
+    {% block admincontent %}
+    {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

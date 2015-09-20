@@ -1,4 +1,5 @@
 $site_red: #e74c3c;
+$side_menu_width: 25%;
 
 *{
     margin:0;
@@ -74,6 +75,47 @@ $site_red: #e74c3c;
     //x
 }
 
+.side-menu{
+    width:$side_menu_width;
+    height:100%;
+    float:left;
+    
+
+    ul, li{
+        list-style: none;
+        width:100%;
+
+        .navbtn{
+            width:100%;
+            height:32px;
+            line-height: 32px;
+            background-color:black;
+            color:white;
+            text-decoration: none;
+            margin-bottom: 4px;
+            display:block;
+
+            span{
+                padding-left:4px;
+            }
+        }
+
+        .navbtn:hover{
+            color:$site_red;
+            background-color:white;
+            outline-color:lightgray;
+            outline-style: solid;
+            outline-width: 1px;
+            cursor:pointer;
+        }
+    }
+}
+
+.admin-content{
+    float:right;
+    width:100% - $side_menu_width;
+}
+
 .biography{
 
     border-bottom-style:solid;
@@ -94,6 +136,18 @@ $site_red: #e74c3c;
         font-size: .8em;
         font-weight: bold;
         letter-spacing:2px; 
+    }
+}
+
+.typo-table{
+    text-align: left;
+    width:100%;
+
+    td, th{
+        padding:12px;
+        outline-color:lightgray;
+        outline-style: solid;
+        outline-width:1px;
     }
 }
 

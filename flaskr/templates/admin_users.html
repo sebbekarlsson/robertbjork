@@ -1,0 +1,35 @@
+{% extends "admin.html" %}
+{% block admincontent %}
+<div class='info-full'>
+    <h2>Manage Users</h2>
+    <p>
+        On this page, you will be able to manage all of your users.
+    </p>
+</div>
+<table class='typo-table'>
+    <tr>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Admin</th>
+        <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.email }}</td>
+        <td class='editable'>{{ user.password }}</td>
+        <td class='editable'>{{ user.admin }}</td>
+        <td>
+            <form method='POST'>
+                <input type='hidden' name='selected_user' value='{{ user.id }}'>
+                {% if user.admin != 1 %}
+                    <input type='submit' name='make_admin' value='Make Admin'>
+                {% else %}
+                    <input type='submit' name='remove_admin' value='Remove Admin'>
+                {% endif %}
+                <input type='submit' name='delete' value='Delete'>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

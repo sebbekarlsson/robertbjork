@@ -6,6 +6,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email
 from models import sess, User
 
+from userhandle import get_user
+
 
 login = Blueprint('login', __name__,
                         template_folder='templates')
@@ -17,7 +19,6 @@ class MyForm(Form):
 
 @login.route('/login', methods=('GET', 'POST'))
 def login_blueprint():
-
     if session.get('user') != None:
         return redirect('/')
 
@@ -26,15 +27,21 @@ def login_blueprint():
 
     if form.validate_on_submit():
         fetched_user = sess.query(User).filter(User.email==form.email.data).first()
-        
-        if fetched_user.password != form.password.data:
-            session.clear()
-            msg = 'Wrong password'
+
+        if fetched_user == None:
+            msg = 'No such user'
         else:
-            if fetched_user.password == form.password.data:
-                session['user'] = fetched_user.id
-                session['loggedin'] = True
-                
-                return redirect('/')
+            if fetched_user.password != form.password.data:
+                session.clear()
+                msg = 'Wrong password'
+            else:
+                if fetched_user.password == form.password.data:
+                    session['user'] = fetched_user.id
+                    session['loggedin'] = True
+
+                    if get_user(session.get('user')).admin == 1:
+                        return redirect('/admin')
+
+                    return redirect('/')
 
     return render_template('login.html', form=form, msg=msg)
