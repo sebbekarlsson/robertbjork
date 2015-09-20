@@ -6,7 +6,7 @@
 
 {% from "_formhelpers.html" import render_field %}
 <form class='typo-form biography' method="POST" action="/login">
-    <ul>
+    <ul>{{ session['user'] }}
         <li>
             {{ render_field(form.email, class_="typo-text info-full") }}
         </li>
@@ -15,6 +15,9 @@
         </li>
         <li>
             {{ render_field(form.submit) }}
+        </li>
+        <li>
+            <p> {{ msg }} </p>
         </li>
     </ul>
 </form>

@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, abort, request
+from flask import Blueprint, render_template, abort, request, session
 from jinja2 import TemplateNotFound
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email
+from models import sess, User
 
 
 login = Blueprint('login', __name__,
@@ -17,5 +18,17 @@ class MyForm(Form):
 @login.route('/login', methods=('GET', 'POST'))
 def login_blueprint():
     form = MyForm(csrf_enabled=False)
-    form.validate_on_submit()
-    return render_template('login.html', form=form)
+    msg = ''
+
+    if form.validate_on_submit():
+        fetched_user = sess.query(User).filter(User.email==form.email.data).first()
+        
+        if fetched_user.password != form.password.data:
+            session.clear()
+            msg = 'Wrong password'
+        else:
+            if fetched_user.password == form.password.data:
+                session['user'] = fetched_user.id
+                msg = 'Welcome'
+
+    return render_template('login.html', form=form, msg=msg)
