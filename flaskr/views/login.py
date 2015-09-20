@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, request, session
+from flask import Blueprint, render_template, abort, request, session, url_for, redirect
 from jinja2 import TemplateNotFound
 
 from flask_wtf import Form
@@ -17,6 +17,10 @@ class MyForm(Form):
 
 @login.route('/login', methods=('GET', 'POST'))
 def login_blueprint():
+
+    if session.get('user') != None:
+        return redirect('/')
+
     form = MyForm(csrf_enabled=False)
     msg = ''
 
@@ -29,6 +33,8 @@ def login_blueprint():
         else:
             if fetched_user.password == form.password.data:
                 session['user'] = fetched_user.id
-                msg = 'Welcome'
+                session['loggedin'] = True
+                
+                return redirect('/')
 
     return render_template('login.html', form=form, msg=msg)

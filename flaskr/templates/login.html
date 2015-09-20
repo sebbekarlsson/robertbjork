@@ -6,7 +6,7 @@
 
 {% from "_formhelpers.html" import render_field %}
 <form class='typo-form biography' method="POST" action="/login">
-    <ul>{{ session['user'] }}
+    <ul>
         <li>
             {{ render_field(form.email, class_="typo-text info-full") }}
         </li>
