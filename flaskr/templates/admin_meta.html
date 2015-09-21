@@ -10,6 +10,9 @@
 <form class='typo-form biography' method="POST">
     <ul>
         <li>
+            {{ render_field(bioform.heading, class_="typo-text info-full") }}
+        </li>
+        <li>
             {{ render_field(bioform.bio, class_="typo-textarea info-full") }}
         </li>
         <li>

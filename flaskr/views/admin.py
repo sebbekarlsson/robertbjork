@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, session, request
 from jinja2 import TemplateNotFound
 from userhandle import get_user, get_users, only_admin, make_admin, remove_admin, unregister
 
-from sitehandle import get_option
+from sitehandle import get_option, create_option
 
 from flask_wtf import Form
 from wtforms import TextAreaField, SubmitField, SelectField, StringField
@@ -51,6 +51,7 @@ admin_meta = Blueprint('admin_meta', __name__,
                         template_folder='templates')
 
 class BioForm(Form):
+    heading = StringField('Heading')
     bio = TextAreaField('Bio')
     submit = SubmitField('Update')
 
@@ -63,10 +64,23 @@ def admin_meta_blueprint():
     msg = ''
 
     if bioform.validate_on_submit():
-        get_option('bio').value = bioform.bio.data
+        if get_option('bio') != None:
+            get_option('bio').value = bioform.bio.data
+        else:
+            create_option('bio', bioform.bio.data)
+
+        if get_option('bio_heading') != None:
+            get_option('bio_heading').value = bioform.heading.data
+        else:
+            create_option('bio_heading', bioform.heading.data)
+
         sess.commit()
     else:
-        bioform.bio.data = get_option('bio').value
+        if get_option('bio_heading') != None:
+            bioform.heading.data = get_option('bio_heading').value
+
+        if get_option('bio') != None:
+            bioform.bio.data = get_option('bio').value
 
     return render_template('admin_meta.html', bioform=bioform, msg=msg)
 

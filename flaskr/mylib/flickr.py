@@ -1,7 +1,8 @@
 import requests
 import yaml as yaml
 import xml.etree.ElementTree as ET
-from sitehandle import get_option
+#from sitehandle import get_option
+
 
 class Photo(object):
     def __init__(self, photo_id, server_id, secret, farm):
@@ -13,6 +14,15 @@ class Photo(object):
 
     def get_src(self, size):
         return self.src_template.format(farm=self.farm, server_id=self.server_id, photo_id=self.photo_id, secret=self.secret, size=size)
+
+class Comment(object):
+    def __init__(self, id, author, authorname, created, text):
+        self.id = id
+        self.author = author
+        self.authorname = authorname
+        self.created = created
+        self.text = text
+
 
 class Flickr(object):
     def __init__(self, api_key, api_secret, api_farm):
@@ -51,6 +61,23 @@ class Flickr(object):
 
         return photos
 
-    def get_comments(photo_id):
+    def get_comments(self, photo_id):
+        comments = []
+
         r = self.send_request(method='flickr.photos.comments.getList', args='photo_id={photo_id}'.format(photo_id=photo_id))
+
+        root = ET.fromstring(r.text.encode('utf-8'))
+
+        for child in root.getchildren():
+            for comment in child.getchildren():
+
+                id = comment.attrib['id']
+                author = comment.attrib['author']
+                authorname = comment.attrib['authorname']
+                created = comment.attrib['datecreate']
+                text = comment.text
+
+                comments.append(Comment(id=id, author=author, authorname=authorname, created=created, text=text))
+
+        return comments
         

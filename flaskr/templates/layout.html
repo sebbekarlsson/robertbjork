@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{{ url_for('static', filename='js/imageviewer.js') }}"></script>
     <script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
-    <!-- <script src="{{ url_for('static', filename='js/editable.js') }}"></script> -->
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <title>{% block title %}{% endblock %} - RobertBjork</title>
@@ -41,6 +41,7 @@
       {% include "imageviewer.html" %}
     </body>
     <footer>
+      <script src="{{ url_for('static', filename='js/imageslider.js') }}"></script>
       {% block footer %}
       {% endblock %}
     </footer>

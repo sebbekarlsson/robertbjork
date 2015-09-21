@@ -2,9 +2,13 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-
+<div class='image-slider' images='{% for photo in photos %}{{photo.get_src("b")}},{% endfor %}'>
+    <div class='slider-content'>
+        <h1>Robert Björkén</h1>
+    </div>
+</div>
 <div class='biography info'>
-    <h1>Robert Björkén</h1>
+    <h1>{{ bio_heading.value }}</h1>
     <p>
         {{ bio.value.replace('\n', '<br>')|safe }}
     </p>

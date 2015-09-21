@@ -44,6 +44,20 @@
   width: 150px;
   margin: 12px; }
 
+.image-slider {
+  width: 100%;
+  height: 360px;
+  background-color: black;
+  display: table;
+  background-position: center;
+  background-size: 45%;
+  background-repeat: no-repeat; }
+  .image-slider .slider-content {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: white; }
+
 .left {
   float: left; }
 
@@ -222,6 +236,9 @@
 
   .side-menu {
     float: none;
-    width: 100%; } }
+    width: 100%; }
+
+  .image-slider {
+    background-size: cover; } }
 
 /*# sourceMappingURL=style.css.map */
