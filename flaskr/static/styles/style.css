@@ -237,6 +237,9 @@
     width: 100%; }
 
   .image-slider {
-    background-size: cover; } }
+    background-size: cover; }
+
+  .no-mobile {
+    display: none !important; } }
 
 /*# sourceMappingURL=style.css.map */
