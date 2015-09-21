@@ -7,9 +7,6 @@
   height: 150px;
   width: 100%; }
 
-#content {
-  padding: 8px; }
-
 .navbar {
   width: 100%;
   height: 48px; }
@@ -46,7 +43,7 @@
 
 .image-slider {
   width: 100%;
-  height: 360px;
+  height: 560px;
   background-color: black;
   display: table;
   background-position: center;
@@ -101,7 +98,8 @@
 .biography {
   border-bottom-style: solid;
   border-bottom-color: lightgray;
-  border-bottom-width: 1px; }
+  border-bottom-width: 1px;
+  padding: 8px; }
   .biography h1, .biography h2, .biography h3 {
     font-family: Georgia,serif;
     color: #4E443C;
