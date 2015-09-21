@@ -50,6 +50,10 @@
 .right {
   float: right; }
 
+.purple {
+  background-color: #9b59b6;
+  color: white; }
+
 .side-menu {
   width: 25%;
   height: 100%;
@@ -99,7 +103,8 @@
     font-family: Georgia,serif;
     font-size: .8em;
     font-weight: bold;
-    letter-spacing: 2px; }
+    letter-spacing: 2px;
+    width: 80%; }
 
 .typo-table {
   text-align: left;
@@ -120,7 +125,8 @@
 .typo-form {
   width: 60%; }
   .typo-form ul, .typo-form li {
-    margin-bottom: 12px; }
+    margin-bottom: 12px;
+    list-style: none; }
 
 .typo-textarea {
   width: 100%;
@@ -212,6 +218,10 @@
 
 @media screen and (max-width: 700px) {
   .navbar .navbtn {
-    font-size: 12px !important; } }
+    font-size: 12px !important; }
+
+  .side-menu {
+    float: none;
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */

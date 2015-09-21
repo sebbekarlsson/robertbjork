@@ -1,6 +1,7 @@
 import requests
 import yaml as yaml
 import xml.etree.ElementTree as ET
+from sitehandle import get_option
 
 class Photo(object):
     def __init__(self, photo_id, server_id, secret, farm):
@@ -14,15 +15,14 @@ class Photo(object):
         return self.src_template.format(farm=self.farm, server_id=self.server_id, photo_id=self.photo_id, secret=self.secret, size=size)
 
 class Flickr(object):
-    def __init__(self):
+    def __init__(self, api_key, api_secret, api_farm):
         self.base_url = 'https://api.flickr.com/services/rest/'
         with open("../config.yml", 'r') as stream:
             self.config = yaml.load(stream)
             
-        self.key = self.config['api']['key']
-        self.secret = self.config['api']['key']
-        self.farm = self.config['api']['farm']
-        self.server_id = self.config['api']['server_id']
+        self.key = api_key
+        self.secret = api_secret
+        self.farm = api_farm
 
     def send_request(self, method, args):
         full_url = self.base_url + '?method={method}&api_key={key}&{args}'.format(method=method, key=self.key, args=args)
@@ -50,3 +50,7 @@ class Flickr(object):
                 photos.append(photo)
 
         return photos
+
+    def get_comments(photo_id):
+        r = self.send_request(method='flickr.photos.comments.getList', args='photo_id={photo_id}'.format(photo_id=photo_id))
+        

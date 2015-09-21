@@ -6,9 +6,7 @@
 <div class='biography info'>
     <h1>Robert Björkén</h1>
     <p>
-        Welcome to my website. This text is just a sample text.<br>
-        On this website I will share all of my photography work.
-        Make sure to check out my flickr page.
+        {{ bio.value.replace('\n', '<br>')|safe }}
     </p>
 </div>
 

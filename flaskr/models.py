@@ -19,6 +19,12 @@ class User(Base):
     password = Column(String)
     admin = Column(Integer, default=0)
 
+class Option(Base):
+    __tablename__ = 'options'
+    id = Column(Integer, primary_key=True)
+    key = Column(String, unique=True)
+    value = Column(String)
+
 
 def initialize_database():
     Base.metadata.create_all(engine)

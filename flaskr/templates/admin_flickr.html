@@ -1,4 +1,5 @@
 {% extends "admin.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% block admincontent %}
 <div class='info-full'>
     <h2>Manage Flickr</h2>
@@ -6,4 +7,23 @@
         On this page, you will be able to manage different options for your Flickr connection.
     </p>
 </div>
+<form class='typo-form biography' method="POST">
+    <ul>
+        <li>
+            {{ render_field(flickrform.apikey, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(flickrform.apisecret, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(flickrform.farm) }}
+        </li>
+        <li>
+            {{ render_field(flickrform.submit) }}
+        </li>
+        <li>
+            <p> {{ msg }} </p>
+        </li>
+    </ul>
+</form>
 {% endblock %}

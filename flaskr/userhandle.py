@@ -1,6 +1,7 @@
-from models import sess, User
+from models import sess, User, Option
 from flask import session, render_template
 from sqlalchemy import update
+
 
 def get_user(id):
     return sess.query(User).filter(User.id==id).first()
@@ -17,7 +18,7 @@ def only_admin():
     return None
 
 def get_users(offset, limit):
-    return sess.query(User).offset(offset).limit(limit)
+    return sess.query(User).limit(limit).offset(offset)
 
 def unregister(id):
     sess.delete(get_user(id))

@@ -6,6 +6,12 @@
         On this page, you will be able to manage all of your users.
     </p>
 </div>
+<nav class='navbar navbar-simple'>
+    <ul class='left'>
+        <li><a class='navbtn' href="/admin/users/{{page|int - 1}}">Previous</a></li>
+        <li><a class='navbtn' href="/admin/users/{{page|int + 1}}">Next</a></li>
+    </ul>
+</nav>
 <table class='typo-table'>
     <tr>
         <th>Email</th>
@@ -14,7 +20,7 @@
         <th>Action</th>
     </tr>
     {% for user in users %}
-    <tr>
+    <tr {% if user.admin == 1 %} class='purple' {% endif %}  >
         <td>{{ user.email }}</td>
         <td class='editable'>{{ user.password }}</td>
         <td class='editable'>{{ user.admin }}</td>

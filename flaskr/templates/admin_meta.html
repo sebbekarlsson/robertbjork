@@ -1,4 +1,5 @@
 {% extends "admin.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% block admincontent %}
 <div class='info-full'>
     <h2>Manage Meta</h2>
@@ -6,4 +7,17 @@
         On this page, you will be able to manage all of your site-meta.
     </p>
 <div class='info-full'>
+<form class='typo-form biography' method="POST">
+    <ul>
+        <li>
+            {{ render_field(bioform.bio, class_="typo-textarea info-full") }}
+        </li>
+        <li>
+            {{ render_field(bioform.submit) }}
+        </li>
+        <li>
+            <p> {{ msg }} </p>
+        </li>
+    </ul>
+</form>
 {% endblock %}

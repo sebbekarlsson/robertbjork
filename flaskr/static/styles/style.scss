@@ -1,4 +1,5 @@
 $site_red: #e74c3c;
+$site_purple: #9b59b6;
 $side_menu_width: 25%;
 
 *{
@@ -75,6 +76,11 @@ $side_menu_width: 25%;
     //x
 }
 
+.purple{
+    background-color:$site_purple;
+    color:white;
+}
+
 .side-menu{
     width:$side_menu_width;
     height:100%;
@@ -135,7 +141,8 @@ $side_menu_width: 25%;
         font-family:Georgia,serif;
         font-size: .8em;
         font-weight: bold;
-        letter-spacing:2px; 
+        letter-spacing:2px;
+        width:80%;
     }
 }
 
@@ -165,6 +172,7 @@ $side_menu_width: 25%;
 
     ul, li{
         margin-bottom:12px;
+        list-style:none;
     }
 }
 
@@ -272,5 +280,10 @@ $side_menu_width: 25%;
         .navbtn{
             font-size:12px !important;
         }
+    }
+
+    .side-menu{
+        float:none;
+        width:100%;
     }
 }
