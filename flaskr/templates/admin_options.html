@@ -1,0 +1,52 @@
+{% extends "admin.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block admincontent %}
+<div class='info-full'>
+    <h2>Manage Options</h2>
+    <p>
+        On this page, you will be able to manage all of your options.
+    </p>
+</div>
+<form class='typo-form biography' method="POST">
+    <ul>
+        <li>
+            {{ render_field(optionsform.key, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(optionsform.value, class_="typo-text info-full") }}
+        </li>
+        <li>
+            {{ render_field(optionsform.create) }}
+        </li>
+        <li>
+            <p> {{ msg }} </p>
+        </li>
+    </ul>
+</form>
+<nav class='navbar navbar-simple'>
+    <ul class='left'>
+        <li><a class='navbtn' href="/admin/options/{{page|int - 1}}">Previous</a></li>
+        <li><a class='navbtn' href="/admin/options/{{page|int + 1}}">Next</a></li>
+    </ul>
+</nav>
+<table class='typo-table'>
+    <tr>
+        <th>id</th>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+    {% for option in options %}
+    <tr>
+        <td>{{ option.id }}</td>
+        <td>{{ option.key }}</td>
+        <td>{{ option.value }}</td>
+        <td>
+            <form method='POST'>
+                <input type='hidden' name='selected_option' value='{{ option.key }}'>
+                <input type='submit' name='delete' value='Delete'>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

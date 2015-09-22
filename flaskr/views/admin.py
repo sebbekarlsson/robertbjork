@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, session, request
 from jinja2 import TemplateNotFound
 from userhandle import get_user, get_users, only_admin, make_admin, remove_admin, unregister
 
-from sitehandle import get_option, create_option, get_flickr
+from sitehandle import get_option, create_option, get_flickr, get_options, delete_option
 
 from flask_wtf import Form
 from wtforms import TextAreaField, SubmitField, SelectField, StringField
@@ -83,6 +83,39 @@ def admin_meta_blueprint():
             bioform.bio.data = get_option('bio').value
 
     return render_template('admin_meta.html', bioform=bioform, msg=msg)
+
+
+
+admin_options = Blueprint('admin_options', __name__,
+                        template_folder='templates')
+
+class OptionsForm(Form):
+    key = StringField('Key')
+    value = TextAreaField('Value')
+    create = SubmitField('Create')
+
+@admin_options.route('/admin/options/<page>', methods=['POST', 'GET'])
+def admin_options_blueprint(page=0):
+    if only_admin() != None:
+        return only_admin()
+
+    optionsform = OptionsForm(csrf_enabled=False)
+    options = get_options(offset=int(page)*10, limit=10)
+
+    delete = request.form.get('delete')
+
+    msg = ''
+
+    if delete != None:
+        delete_option(request.form.get('selected_option'))
+
+    if optionsform.validate_on_submit():
+        if optionsform.key.data != None and optionsform.value.data != None and delete == None:
+            create_option(key=optionsform.key.data, value=optionsform.value.data)
+            msg = 'Option was created!'
+
+    return render_template('admin_options.html', options=options, page=page, optionsform=optionsform, msg=msg)
+
 
 
 admin_flickr = Blueprint('admin_flickr', __name__,

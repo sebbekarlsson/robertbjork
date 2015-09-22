@@ -14,6 +14,7 @@
 </nav>
 <table class='typo-table'>
     <tr>
+        <th>id</th>
         <th>Email</th>
         <th>Password</th>
         <th>Admin</th>
@@ -21,6 +22,7 @@
     </tr>
     {% for user in users %}
     <tr {% if user.admin == 1 %} class='purple' {% endif %}  >
+        <td>{{ user.id }}</td>
         <td>{{ user.email }}</td>
         <td class='editable'>{{ user.password }}</td>
         <td class='editable'>{{ user.admin }}</td>
