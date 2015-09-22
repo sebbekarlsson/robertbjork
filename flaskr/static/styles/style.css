@@ -240,6 +240,10 @@
     background-size: cover; }
 
   .no-mobile {
-    display: none !important; } }
+    display: none !important; }
+
+  .admin-content {
+    float: none !important;
+    width: 100% !important; } }
 
 /*# sourceMappingURL=style.css.map */
