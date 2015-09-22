@@ -12,8 +12,7 @@ def index_blueprint():
     bio = get_option('bio')
 
     flickr = get_flickr()
+    flickr.get_galleries('robertbjork', 1, 100)
     photos = flickr.get_photos('robertbjork', 1, 28)
 
-    comments = flickr.get_comments(20794691415)
-
-    return render_template('index.html', bio=bio, bio_heading=bio_heading, photos=photos, comments=comments)
+    return render_template('index.html', bio=bio, bio_heading=bio_heading, photos=photos)

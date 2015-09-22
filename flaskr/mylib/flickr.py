@@ -23,6 +23,15 @@ class Comment(object):
         self.created = created
         self.text = text
 
+class Gallery(object):
+    def __init__(self, id, url, owner, date_create, date_update):
+        self.id = id
+        self.author = author
+        self.authorname = authorname
+        self.created = created
+        self.text = text
+        self.title
+
 
 class Flickr(object):
     def __init__(self, api_key, api_secret, api_farm):
@@ -39,6 +48,41 @@ class Flickr(object):
         r = requests.get(full_url, auth=('user', 'pass'))
         
         return r
+
+    def get_galleries(self, person, page, per_page):
+        galleries = []
+
+        r = self.send_request(method='flickr.galleries.getList', args='user_id={person}&page={page}&per_page={per_page}'\
+            .format(person=person, page=page, per_page=per_page))
+
+        root = ET.fromstring(r.text.encode('utf-8'))
+
+        for child in root.getchildren():
+            for gallery in child.getchildren():
+
+
+                id = gallery.attrib['id']
+                url = gallery.attrib['url']
+                owner = gallery.attrib['owner']
+                date_create = gallery.attrib['date_create']
+                date_update = gallery.attrib['date_update']
+                primary_photo_id = gallery.attrib['primary_photo_id']
+                primary_photo_server = gallery.attrib['primary_photo_server']
+                primary_photo_farm = gallery.attrib['primary_photo_farm']
+                primary_photo_secret = gallery.attrib['primary_photo_secret']
+                count_photos = gallery.attrib['count_photos']
+                count_videos = gallery.attrib['count_videos']
+                title = ''
+
+                for contents in gallery.getchildren():
+                    if contents.tag == 'title':
+                        title = contents.text
+
+                gallery = Gallery(id=id, url=url, owner=owner, date_create=date_create, date_update=date_update, title=title)
+
+
+
+        return galleries
 
     def get_photos(self, person, page, per_page):
         urls = []
