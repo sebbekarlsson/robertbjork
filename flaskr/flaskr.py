@@ -13,6 +13,7 @@ from views.admin import admin
 from views.admin import admin, admin_users, admin_meta, admin_flickr
 
 from userhandle import get_user
+from sitehandle import get_option
 
 
 with open("../config.yml", 'r') as stream:
@@ -36,3 +37,4 @@ app.register_blueprint(admin_meta)
 app.register_blueprint(admin_flickr)
 
 app.jinja_env.globals.update(get_user=get_user)
+app.jinja_env.globals.update(get_option=get_option)
