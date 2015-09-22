@@ -1,0 +1,11 @@
+{% extends "admin.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block admincontent %}
+<div class='info-full'>
+    <h2>Favourites</h2>
+    <p>
+        These are flickr-photos that you have favourited.
+    </p>
+<div class='info-full'>
+{% include 'gallery.html' %}
+{% endblock %}

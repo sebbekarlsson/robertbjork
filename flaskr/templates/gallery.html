@@ -1,12 +1,9 @@
-{% extends "layout.html" %}
-{% block title %} Home {% endblock %}
-
 {% block content %}
     <div class='gallery-view'>
         <div class='navbar navbar-simple'>
             <ul>
-                <li><a class='navbtn' href="/gallery/{{page|int - 1}}">Previous</a></li>
-                <li><a class='navbtn' href="/gallery/{{page|int + 1}}">Next</a></li>
+                <li><a class='navbtn' href="{{base_url}}{{page|int - 1}}">Previous</a></li>
+                <li><a class='navbtn' href="{{base_url}}{{page|int + 1}}">Next</a></li>
             </ul>
         </div>
         {% for photo in photos %}

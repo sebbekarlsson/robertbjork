@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, abort, session, request
 from jinja2 import TemplateNotFound
 from userhandle import get_user, get_users, only_admin, make_admin, remove_admin, unregister
 
-from sitehandle import get_option, create_option
+from sitehandle import get_option, create_option, get_flickr
 
 from flask_wtf import Form
 from wtforms import TextAreaField, SubmitField, SelectField, StringField
@@ -119,4 +119,23 @@ def admin_flickr_blueprint():
 
 
     return render_template('admin_flickr.html', flickrform=flickrform)
+
+
+
+admin_flickr_favourites = Blueprint('admin_flickr_favourites', __name__,
+                        template_folder='templates')
+
+
+@admin_flickr_favourites.route('/admin/flickr-favourites/<page>', methods=['GET', 'POST'])
+def admin_flickr_favourites_blueprint(page=1):
+    if only_admin() != None:
+        return only_admin()
+
+    flickr = get_flickr()
+    
+    print(flickr.get_nsid(get_option('flickr_user').value))
+
+    photos = flickr.get_favourites(flickr.get_nsid(get_option('flickr_user').value), page, 128)
+
+    return render_template('admin_flickr_favourites.html',photos=photos, page=page, base_url='/admin/flickr-favourites/')
 

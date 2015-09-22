@@ -5,12 +5,13 @@ import xml.etree.ElementTree as ET
 
 
 class Photo(object):
-    def __init__(self, photo_id, server_id, secret, farm):
+    def __init__(self, photo_id, server_id, secret, farm, owner):
         self.src_template = 'https://farm{farm}.staticflickr.com/{server_id}/{photo_id}_{secret}_{size}.jpg'
         self.farm = farm
         self.server_id = server_id
         self.photo_id = photo_id
         self.secret = secret
+        self.owner = owner
 
     def get_src(self, size):
         return self.src_template.format(farm=self.farm, server_id=self.server_id, photo_id=self.photo_id, secret=self.secret, size=size)
@@ -99,8 +100,31 @@ class Flickr(object):
                 secret = photo.attrib['secret']
                 server = photo.attrib['server']
                 title = photo.attrib['title']
+                owner = photo.attrib['owner']
 
-                photo = Photo(photo_id=id, server_id=server, secret=secret, farm=self.farm)
+                photo = Photo(photo_id=id, server_id=server, secret=secret, farm=self.farm, owner=owner)
+                photos.append(photo)
+
+        return photos
+
+    def get_favourites(self, person, page, per_page):
+        urls = []
+        photos = []
+        r = self.send_request(method='flickr.favorites.getList', args='user_id={person}&page={page}&per_page={per_page}'\
+        .format(person=person, page=page, per_page=per_page))
+
+        root = ET.fromstring(r.text.encode('utf-8'))
+
+        for child in root.getchildren():
+            for photo in child.getchildren():
+
+                id = photo.attrib['id']
+                secret = photo.attrib['secret']
+                server = photo.attrib['server']
+                title = photo.attrib['title']
+                owner = photo.attrib['owner']
+
+                photo = Photo(photo_id=id, server_id=server, secret=secret, farm=self.farm, owner=owner)
                 photos.append(photo)
 
         return photos
@@ -124,4 +148,7 @@ class Flickr(object):
                 comments.append(Comment(id=id, author=author, authorname=authorname, created=created, text=text))
 
         return comments
+
+    def get_nsid(self, username):
+         return self.get_photos(person=username, page=1, per_page=1)[0].owner
         

@@ -10,7 +10,7 @@ from views.register import register
 from views.index import index
 from views.logout import logout
 from views.admin import admin
-from views.admin import admin, admin_users, admin_meta, admin_flickr
+from views.admin import admin, admin_users, admin_meta, admin_flickr, admin_flickr_favourites
 
 from userhandle import get_user
 from sitehandle import get_option
@@ -35,6 +35,7 @@ app.register_blueprint(admin)
 app.register_blueprint(admin_users)
 app.register_blueprint(admin_meta)
 app.register_blueprint(admin_flickr)
+app.register_blueprint(admin_flickr_favourites)
 
 app.jinja_env.globals.update(get_user=get_user)
 app.jinja_env.globals.update(get_option=get_option)
