@@ -89,9 +89,10 @@ admin_flickr = Blueprint('admin_flickr', __name__,
                         template_folder='templates')
 
 class FlickrForm(Form):
-    farm = SelectField("Farm", coerce=int, choices=[(i, i) for i in range(1, 10)], default=2)
     apikey = StringField("Api Key")
     apisecret = StringField("Api Secret")
+    farm = SelectField("Farm", coerce=int, choices=[(i, i) for i in range(1, 10)], default=2)
+    flickruser = StringField("Flickr Username")
     submit = SubmitField('Update')
 
 
@@ -107,12 +108,14 @@ def admin_flickr_blueprint():
         get_option('flickr_api_key').value = flickrform.apikey.data
         get_option('flickr_api_secret').value = flickrform.apisecret.data
         get_option('flickr_farm').value = flickrform.farm.data
+        get_option('flickr_user').value = flickrform.flickruser.data
 
         sess.commit()
     else:
         flickrform.apikey.data = get_option('flickr_api_key').value
         flickrform.apisecret.data = get_option('flickr_api_secret').value
         flickrform.farm.data = int(get_option('flickr_farm').value)
+        flickrform.flickruser.data = get_option('flickr_user').value
 
 
     return render_template('admin_flickr.html', flickrform=flickrform)
