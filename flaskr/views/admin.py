@@ -16,7 +16,9 @@ admin = Blueprint('admin', __name__,
 
 @admin.route('/admin/')
 def admin_blueprint():
-    only_admin()
+    if only_admin() != None:
+        return only_admin()
+        
     return render_template('admin.html')
 
 
